@@ -1,0 +1,28 @@
+# Data files
+data/raw/
+
+# Model objects (large)
+models/*.rds
+models/**/*.rds
+output/**/*.rds
+*.rds
+
+# R session files
+.Rhistory
+.RData
+.Rproj.user/
+
+# Figures (reproducible from code)
+figs/*.png
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Compiled tex artifacts
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.fls
+*.fdb_latexmk
