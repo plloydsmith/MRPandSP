@@ -14,6 +14,7 @@ output/**/*.rds
 
 # Figures (reproducible from code)
 figs/*.png
+tables/*.md
 
 # OS files
 Thumbs.db
@@ -26,3 +27,6 @@ Thumbs.db
 *.synctex.gz
 *.fls
 *.fdb_latexmk
+data/derived/PoststratCountsCanada.csv
+data/derived/PoststratCountsWetland.csv
+data/derived/SRDClean.csv
