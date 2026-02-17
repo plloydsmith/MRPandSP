@@ -2,10 +2,11 @@
 data/raw/
 
 # Model objects (large)
-models/*.rds
 models/**/*.rds
 output/**/*.rds
-*.rds
+
+# Simulation precompiled models
+code/Simulations/*.rds
 
 # R session files
 .Rhistory
@@ -16,9 +17,11 @@ output/**/*.rds
 figs/*.png
 tables/*.md
 
-# OS files
+# OS and temp files
 Thumbs.db
 .DS_Store
+~$*
+~*.tmp
 
 # Compiled tex artifacts
 *.aux
@@ -27,6 +30,9 @@ Thumbs.db
 *.synctex.gz
 *.fls
 *.fdb_latexmk
+*.knit.md
+
+# Derived data
 data/derived/PoststratCountsCanada.csv
 data/derived/PoststratCountsWetland.csv
 data/derived/SRDClean.csv
