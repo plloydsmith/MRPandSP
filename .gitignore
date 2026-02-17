@@ -4,6 +4,7 @@ data/raw/
 # Model objects (large)
 models/**/*.rds
 output/**/*.rds
+simulation_output/
 
 # Simulation precompiled models
 code/Simulations/*.rds
@@ -15,7 +16,7 @@ code/Simulations/*.rds
 
 # Figures (reproducible from code)
 figs/*.png
-tables/*.md
+tables/
 
 # OS and temp files
 Thumbs.db
