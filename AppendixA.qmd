@@ -1,0 +1,197 @@
+---
+title: ""
+format:
+  pdf:
+    pdf-engine: xelatex
+    documentclass: article
+    geometry:
+      - margin=1in
+---
+
+```{r}
+#| label: setup
+#| echo: false
+#| warning: false
+
+library(dplyr)
+library(knitr)
+library(kableExtra)
+
+stack_diag <- function(diag_df, model_labels, model_titles) {
+  purrr::map2_dfr(model_labels, model_titles, ~{
+    tibble(
+      Model       = .y,
+      Term        = diag_df$Term,
+      Rhat        = diag_df[[paste0(.x, "_rhat")]],
+      `ESS(bulk)` = diag_df[[paste0(.x, "_ess_bulk")]],
+      `ESS(tail)` = diag_df[[paste0(.x, "_ess_tail")]]
+    )
+  })
+}
+
+render_diag_table <- function(rds_file, drop_all_na = FALSE) {
+  diag_df <- readRDS(rds_file)
+  stacked <- stack_diag(
+    diag_df,
+    model_labels = c("AB", "SK", "MB", "All"),
+    model_titles = c("Alberta", "Saskatchewan", "Manitoba", "All 3 Prairie Provinces")
+  )
+  if (drop_all_na) {
+    stacked <- stacked |>
+      filter(!(is.na(Rhat) & is.na(`ESS(bulk)`) & is.na(`ESS(tail)`)))
+  }
+  stacked[] <- lapply(stacked, function(x) ifelse(is.na(x), "", x))
+  stacked |>
+    kable(
+      col.names = c("Model", "Term", "Rhat", "ESS(bulk)", "ESS(tail)"),
+      align = c("l", "l", "r", "r", "r")
+    ) |>
+    kableExtra::footnote(
+      general = "Rhat close to 1.00 indicates convergence; ESS values represent effective sample sizes for bulk and tail distributions.",
+      threeparttable = TRUE
+    )
+}
+```
+
+# Appendix A for "Multi-level regression and post-stratification for discrete choice modelling and stated preference research"
+
+\setcounter{figure}{0}
+\renewcommand{\thefigure}{A\arabic{figure}}
+
+## Region-level (i.e. Level-2) variables in the MRP model
+
+In the Saskatchewan River Delta (SRD) empirical example, several of the provinces only have a handful of respondents given the quota-sampling strategy employed. For example, only 4 respondents were from Prince Edward Island. To facilitate the pooling of preference information, one can include additional parameters that help explain preference differences among provinces. For example, a region random parameter which groups provinces of Canada into four regions[^1] can be included or provincial-level variables such as the average right-wing political party vote share in the 2021 election ($X_{rw}$).[^2] The purpose of these 'Level 2' variables is to help inform the imputation of WTP in step 2.
+
+[^1]: The four regions include British Columbia and the 3 northern territories, the three prairie provinces (Alberta, Saskatchewan, and Manitoba), Ontario and Quebec, and Atlantic Canada (New Brunswick, Nova Scotia, Prince Edward Island, and Newfoundland and Labrador).
+
+[^2]: The right wing vote share aggregates the vote share for the two main right wing parties in that election: Conservative Party of Canada and the People's Party of Canada.
+
+The revised specification for Equation (9) is now
+
+$$\omega_i = \beta_0 + \alpha_{a,g[i]}^{age-gender} + \alpha_{p[i]}^{province} + \alpha_{m[i]}^{income} + \alpha_{e[i]}^{education}$$
+
+\begin{align}
+\alpha_{a,g}^{age-gender} \sim & N(0,\sigma^2_{age-gender}), \; \; \text{for} \; \; a = 1,..,5, \; g = 1, 2 \\
+\alpha_{m}^{income} \sim & N(0,\sigma^2_{income}), \; \; \text{for} \; \; m = 1,...,7 \; \\
+\alpha_{e}^{education} \sim & N(0,\sigma^2_{education}), \; \; \text{for} \; \; e = 1,...,5 \\
+\alpha_{p}^{province} \sim & N(\alpha_{r[p]}^{region}+\beta_1 X_{rw},\sigma^2_{province}), \; \; \text{for} \; \; p = 1,...11 \; \\
+\alpha_{r}^{region} \sim & N(0,\sigma^2_{region}), \; \; \text{for} \; \; r = 1,...4 \;
+\end{align}
+
+With only 11 provinces, there is little empirical benefit gained from inclduing these Level-2 variables in the current SRD setting. However, for contexts were there are many more geographic regions to predict, such as the 50 American states, the appeal of using these Level-2 variables is higher.
+
+{{< pagebreak >}}
+
+## Additional Tables and Figures
+
+Table A1: WTP-space logit model estimates for a provincial wetland restoration program across the 3 Prairie provinces
+
+```{r, results='asis'}
+#| echo: false
+#| warning: false
+#| class-output: "sourceCode r"
+
+cat(readLines("tables/wetland_logit_model_estimates.md"), sep = "\n")
+``` 
+
+Table A2: WTP-space MRP model estimates for a provincial wetland restoration program across the 3 Prairie provinces
+
+```{r, results='asis'}
+#| echo: false
+#| warning: false
+#| class-output: "sourceCode r"
+
+cat(readLines("tables/wetland_mrp_model_estimates.md"), sep = "\n")
+``` 
+
+{{< pagebreak >}}
+
+Table A3: WTP-space MRP model estimates for a provincial wetland restoration program using the validity sample
+
+```{r, results='asis'}
+#| echo: false
+#| warning: false
+#| class-output: "sourceCode r"
+
+cat(readLines("tables/wetland_restrict_model_estimates.md"), sep = "\n")
+``` 
+
+{{< pagebreak >}}
+
+Table A4: Diagnostics (Rhat, ESS) for SRD restoration program WTP-space logit models
+
+```{r}
+#| echo: false
+#| warning: false
+#| results: asis
+
+cat(readLines("tables/srd_main_model_diagnostics.md"), sep = "\n")
+``` 
+
+{{< pagebreak >}}
+
+Table A5: Diagnostics (Rhat, ESS) for WTP-space wetland logit models
+
+```{r}
+#| echo: false
+#| warning: false
+
+render_diag_table("tables/wetland_logit_model_diagnostics.rds")
+``` 
+
+Table A6: Diagnostics (Rhat, ESS) for WTP-space wetland MRP models
+
+```{r}
+#| echo: false
+#| warning: false
+
+render_diag_table("tables/wetland_mrp_model_diagnostics.rds", drop_all_na = TRUE)
+``` 
+
+{{< pagebreak >}}
+
+Table A7: Diagnostics (Rhat, ESS) for WTP-space wetland MRP models using the validity sample
+
+```{r}
+#| echo: false
+#| warning: false
+
+render_diag_table("tables/wetland_restrict_model_diagnostics.rds", drop_all_na = TRUE)
+``` 
+
+{{< pagebreak >}}
+
+![Comparison of MRP and post-stratification for regional WTP estimation with 3000 survey sample](figs/sim_region.png){#fig-sim-region}
+
+{{< pagebreak >}}
+
+![Example of single binary choice question for wetland survey](figs/wetland_choiceset.png){#fig-wetland-choiceset}
+
+{{< pagebreak >}}
+
+![Example of a choiceset for the Saskatchewan River Delta (SRD) study](figs/srd_choiceset.png){#fig-srd-choiceset}
+
+{{< pagebreak >}}
+
+![Comparison of wetland survey sample and target population across all three Priarie provinces](figs/wetland_comparison.png){#fig-wetland-sample}
+
+{{< pagebreak >}}
+
+![Comparison of wetland survey sample and target population for each province](figs/wetland_comparison_province.png){#fig-wetland-province-comparison}
+
+{{< pagebreak >}}
+
+![WTP for wetland restoration using alternative Logit and MRP specifications without exponentiation](figs/wetland_province_appendix.png){#fig-wetland-province-notexp}
+
+
+{{< pagebreak >}}
+
+![Distribution of MWTP for each SRD attribute using the MRP and RPL approach](figs/srd_distribution_mrp_rpl_parameter.png){#fig-srd-distribution-parameter}
+
+{{< pagebreak >}}
+
+![Comparison of wetland study sample, validity sample, and population across all three Priarie provinces](figs/wetland_comparison_restrict.png){#fig-restrict-sample}
+
+{{< pagebreak >}}
+
+![Comparison of wetland study sample, validity sample, and population for each province](figs/wetland_comparison_province_restrict.png){#fig-wetland-province-comparison-restrict}

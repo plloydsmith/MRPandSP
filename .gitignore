@@ -28,6 +28,7 @@ Thumbs.db
 # Compiled tex artifacts
 *.aux
 *.log
+*.tex
 *.out
 *.synctex.gz
 *.fls
