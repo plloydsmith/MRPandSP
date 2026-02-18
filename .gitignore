@@ -37,3 +37,6 @@ Thumbs.db
 data/derived/PoststratCountsCanada.csv
 data/derived/PoststratCountsWetland.csv
 data/derived/SRDClean.csv
+
+# Allow .gitkeep files in otherwise-ignored directories
+!**/.gitkeep
