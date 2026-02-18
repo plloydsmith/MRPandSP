@@ -1,5 +1,5 @@
 # Data files
-data/raw/
+data/raw/*.csv
 
 # Model objects (large)
 models/**/*.rds
