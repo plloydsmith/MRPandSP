@@ -2,9 +2,18 @@
 
 This repository contains the code and analysis pipeline for applying **Multilevel Regression and Poststratification (MRP)** to stated preference valuation surveys. The project compares MRP to conventional approaches (MNL, RPL) using two empirical applications and a Monte Carlo simulation study.
 
+## Paper & Appendices
+
+- [**MRPandSPPaper.pdf**](MRPandSPPaper.pdf) — Main manuscript
+- [**AppendixA.pdf**](AppendixA.pdf) — Appendix A: additional tables, figures, and MCMC diagnostics
+- [**AppendixB_SurveySRD.pdf**](AppendixB_SurveySRD.pdf) — Appendix B: SRD survey instrument
+- [**AppendixC_SurveyWetland.pdf**](AppendixC_SurveyWetland.pdf) — Appendix C: Wetland survey instrument
+
 ## Project Structure
 
 ```
+MRPandSPPaper.qmd   # Main manuscript (Quarto → PDF)
+AppendixA.qmd       # Appendix A: additional tables, figures, and diagnostics
 code/
 ├── SRD/            # Saskatchewan River Delta choice experiment
 ├── Wetland/        # Prairie wetland single binary choice
