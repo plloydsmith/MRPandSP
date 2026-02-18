@@ -20,7 +20,7 @@ CONFIG <- list(
   # --- Survey ---
   BID_ACCEPTANCES = c(0.2, 0.4, 0.6, 0.8),
   SAMPLE_SIZES = c(500, 1000, 3000),
-  BIAS_STRENGTHS = c(0, 1, 1.5),
+  BIAS_STRENGTHS = c(0, 0.5, 1),
   N_REPLICATES = 100,
   N_BOOTSTRAP_DRAWS = 100,
 
