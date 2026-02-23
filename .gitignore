@@ -16,6 +16,9 @@ code/Simulations/*.rds
 
 # Figures (reproducible from code)
 figs/*.png
+
+# Allow figures referenced directly in the user guide
+!figs/srd_mean_all.png
 tables/*.md
 tables/*.rds
 
@@ -39,6 +42,11 @@ Thumbs.db
 data/derived/PoststratCountsCanada.csv
 data/derived/PoststratCountsWetland.csv
 data/derived/SRDClean.csv
+
+# Quarto rendered outputs (not needed — embed-resources: true makes HTML self-contained)
+docs/*_files/
+README.html
+README_files/
 
 # Allow .gitkeep files in otherwise-ignored directories
 !**/.gitkeep

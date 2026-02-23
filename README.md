@@ -2,6 +2,13 @@
 
 This repository contains the code and analysis pipeline for applying **Multilevel Regression and Poststratification (MRP)** to stated preference valuation surveys. The project compares MRP to conventional approaches (MNL, RPL) using two empirical applications and a Monte Carlo simulation study.
 
+## User Guide
+
+A step-by-step practitioner's guide to implementing MRP for stated preference research, using the SRD choice experiment as a worked example:
+
+- [**User guide**](https://plloydsmith.github.io/MRPandSP/user-guide-mrp-srd.html) — rendered HTML (GitHub Pages)
+- [**Source**](docs/user-guide-mrp-srd.qmd) — Quarto source file
+
 ## Paper & Appendices
 
 - [**MRPandSPPaper.pdf**](MRPandSPPaper.pdf) — Main manuscript

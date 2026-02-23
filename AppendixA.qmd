@@ -161,7 +161,7 @@ render_diag_table("tables/wetland_restrict_model_diagnostics.rds", drop_all_na =
 
 {{< pagebreak >}}
 
-![Comparison of MRP and post-stratification for regional WTP estimation with 3000 survey sample](figs/sim_region.png){#fig-sim-region}
+![Comparison of MRP and post-stratification for regional WTP estimation with 3000 survey sample](figs/sim_region3000.png){#fig-sim-region3000}
 
 {{< pagebreak >}}
 
