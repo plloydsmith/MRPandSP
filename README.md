@@ -1,4 +1,4 @@
-# MRP and Stated Preferences
+# MRP and Stated Preference
 
 This repository contains the code and analysis pipeline for applying **Multilevel Regression and Poststratification (MRP)** to stated preference valuation surveys. The project compares MRP to conventional approaches (MNL, RPL) using two empirical applications and a Monte Carlo simulation study.
 
