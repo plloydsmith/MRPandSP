@@ -1,13 +1,17 @@
 ---
 title: "Multi-level regression and post-stratification for discrete choice modelling and stated preference research"
 author:
-  - name: Patrick Lloyd-Smith^[Patrick Lloyd-Smith is an Associate Professor in the Department of Agricultural and Resource Economics at the University of Saskatchewan (Room 3D34, Agriculture Building, 51 Campus Drive, Saskatoon, SK S7N5A8 Canada; patrick.lloydsmith@usask.ca). This research was supported by the Social Science and Humanities Research Council (SSHRC), the Global Water Futures research programme, and Smart Prosperity. I thank the editor Klaus Moeltner and two anonymous reviewers, seminar participants at Oregon State University, University of Alberta, and University of Saskatchewan as well as participants of the 2024 Canadian Resource and Environmental Economics Association conference for helpful comments on this research. I have no conflict of interest or financial discloures to declare. ]
+  - name: Patrick Lloyd-Smith^[Patrick Lloyd-Smith is an Associate Professor in the Department of Agricultural and Resource Economics at the University of Saskatchewan (Room 3D34, Agriculture Building, 51 Campus Drive, Saskatoon, SK S7N5A8 Canada; patrick.lloydsmith@usask.ca). This paper is published in Journal of Environmental Economics and Management https://doi.org/10.1016/j.jeem.2026.103315. This research was supported by the Social Science and Humanities Research Council (SSHRC), the Global Water Futures research programme, and Smart Prosperity. I thank the editor Klaus Moeltner and two anonymous reviewers, seminar participants at Oregon State University, University of Alberta, and University of Saskatchewan as well as participants of the 2024 Canadian Resource and Environmental Economics Association conference for helpful comments on this research. I have no conflict of interest or financial discloures to declare. ]
     email: patrick.lloydsmith@usask.ca
     note: 
     affiliations:
       - name: Department of Agricultural and Resource Economics, University of Saskatchewan
 date: "February 17, 2026"
 date-format: long
+doi: "10.1016/j.jeem.2026.103315"                                                                          
+journal:
+    name: "Journal of Environmental Economics and Management"
+    abbrev: "JEEM"
 format: 
 #  html
 #  docx:
@@ -16,6 +20,14 @@ format:
     linestretch: 1.5
     number-sections: true
 bibliography: references.bib
+header-includes:
+  - \usepackage{fancyhdr}
+  - \pagestyle{fancy}
+  - \fancyhf{}
+  - \fancyhead[L]{\textit{JEEM}}
+  - \fancyhead[R]{\small doi:10.1016/j.jeem.2026.103315}
+  - \fancyfoot[C]{\thepage}
+  - \renewcommand{\headrulewidth}{0.4pt}
 abstract: | 
   Obtaining valid answers from respondents has been a central concern of stated preference (SP) studies. In contrast, sample representativeness is the main focus of current public polling accuracy debates, largely due to declining survey response rates. We introduce the multi-level regression and post-stratification (MRP) modelling approach to welfare estimation using discrete choice models. Through monte carlo simulations and two water resource valuation surveys, we demonstrate how MRP can help researchers to (i) generate population-relevant welfare measures from non-representative samples, (ii) estimate preference heterogeneity and distributional impacts across people, and (iii) evaluate the impacts of removing potentially invalid responses using a consistent target population frame. We propose MRP as a complementary modelling approach for non-market valuation data and discuss its opportunities and limitations.
 ---
@@ -407,15 +419,11 @@ To demonstrate this MRP use case, we use the wetland survey data and the MRP app
 
 [^28]: In each province, the change in sample sizes are 870 to 526 in Alberta, 811 to 459 in Manitoba, and 318 to 192 in Saskatchewan.
 
-![Comparison of wetland study sample, validity sample, and population across all three Priarie provinces](figs/wetland_comparison_restrict.png){#fig-restrict-sample}
-
 ![Comparing the impacts of removing invalid responses using consistent population-estimate frames](figs/wetland_restrict.png){#fig-restrict-wtp}
 
 We first assess the representativeness effects of using the validity sample and then present the MRP WTP result comparisons. Figure A8 compares the representativeness of the full sample, the validity sample, and the target population across the three Prairie provinces. Analogous province-specific comparisons are provided in Figure A9. Across the respondent characteristics, the validity sample is generally more unrepresentative of the target population than the full sample. This finding provides some empirical evidence that validity checks that improve the validity of responses by excluding certain anomalous responses can exacerbate representativeness issues.
 
-@fig-restrict-wtp presents the estimated MRP WTP distributions for a wetland restoration program across the three provinces using the full sample and the validity sample.[^29] The mean WTP estimates are lower using the validity sample compared to the full sample. Excluding 'yeasayers' necessarily decreases WTP as only yes votes are removed but the effect on WTP of excluding respondents with inconsequential beliefs is less clear a priori but there is empirical evidence that people with consequential beliefs also have higher WTP [@herriges2010]. @Boldt2026_wetland uses the same wetland survey data and finds that people with consequential beliefs have a higher WTP. The important point for the comparison is that the post-stratification target population frame is consistent across the two MRP estimates even though the sample used for analysis is different. Thus, we can be sure that these differences are not due to differences in subsample respondent characteristic composition that are identified in @fig-restrict-sample. The MRP approach prevents the confounding of assessing the impacts of improving sample validity while sample representativeness also changes if the post-stratification step is not conducted.
-
-[^29]: Appendix A provides an example of how to include region-level (i.e. Level 2) variables.
+@fig-restrict-wtp presents the estimated MRP WTP distributions for a wetland restoration program across the three provinces using the full sample and the validity sample. The mean WTP estimates are lower using the validity sample compared to the full sample. Excluding 'yeasayers' necessarily decreases WTP as only yes votes are removed but the effect on WTP of excluding respondents with inconsequential beliefs is less clear a priori but there is empirical evidence that people with consequential beliefs also have higher WTP [@herriges2010]. @Boldt2026_wetland uses the same wetland survey data and finds that people with consequential beliefs have a higher WTP. The important point for the comparison is that the post-stratification target population frame is consistent across the two MRP estimates even though the sample used for analysis is different. Thus, we can be sure that these differences are not due to differences in subsample respondent characteristic composition that are identified in @fig-restrict-sample. The MRP approach prevents the confounding of assessing the impacts of improving sample validity while sample representativeness also changes if the post-stratification step is not conducted.
 
 # Conclusion
 
