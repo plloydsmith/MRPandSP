@@ -22,14 +22,13 @@ figs/*.png
 tables/*.md
 tables/*.rds
 
-# Claude Code settings
-.claude/
 
 # OS and temp files
 Thumbs.db
 .DS_Store
 ~$*
 ~*.tmp
+.claude/
 
 # Compiled tex artifacts
 *.aux
